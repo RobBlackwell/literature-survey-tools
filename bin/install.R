@@ -6,11 +6,11 @@ r["CRAN"] <- "http://cran.uk.r-project.org"
 options(repos = r)
 rm(r)
 
-#install.packages("tm")
-#install.packages("SnowballC")
+install.packages("tm")
+install.packages("SnowballC")
 
-## source("https://bioconductor.org/biocLite.R")
-## biocLite("Rgraphviz")
+source("https://bioconductor.org/biocLite.R")
+biocLite("Rgraphviz")
 
-##install.packages("wordcloud")
-# install.packages("ggplot2")
+install.packages("wordcloud")
+install.packages("ggplot2")
