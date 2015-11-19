@@ -11,6 +11,9 @@ tika:
 
 install:
 	bin/install.R
+	pip install nltk
+	pip install textstat
+	bin/install.py
 
 wordclouds:
 	bin/wordcloud.R tmp/*.txt
@@ -20,6 +23,10 @@ freqs:
 
 correlations:
 	bin/correlation.R tmp/*.txt
+
+styles:
+	bin/style.py tmp/*.txt
+
 
 doc:
 	bin/figures.py tmp/*.pdf > index.tex
