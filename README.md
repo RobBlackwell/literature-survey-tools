@@ -36,7 +36,7 @@ Typing
 
 	make tika
 
-converts all the files from doc, placing output in tmp.
+converts all the files from data, placing output in tmp.
 
 ## R Dependencies
 
