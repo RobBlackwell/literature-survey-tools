@@ -109,6 +109,12 @@ principle. There must be better algorithms?
 
 	make ngrams
 
+## Clean-up
+
+Remove all files ready for a new run
+
+	make clean
+
 ## Brain dump ideas
 
 Instead of generating a PDF, build an HTML web site, so that cross
