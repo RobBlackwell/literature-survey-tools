@@ -181,12 +181,16 @@ authors, institutions, plant types, etc and turn these into links?
 Can we use NER to identify placenames and locations and draw a map of
 the areas which the papers cover?
 
+Can we extract dates from the text? Do we know date of publication? Could we draw a time line?
+
+What do we do about pesky unicode encoding .. the Python stuff seems
+ugly to keep worrying about UTF-8 and character sets?
+
 NLTK may not up to the job??? What other NLP toolkits are out there?
 The ngrams shows up limitations in the sentence tokeniser
 particularly.
 
-What do we do about pesky unicode encoding .. the Python stuff seems
-ugly to keep worrying about UTF-8 and character sets?
+https://github.com/NaturalNode/natural looks nice and easy? Should we use more R?
 
 What can we learn from http://nlp.stanford.edu http://lac.essex.ac.uk
 https://opennlp.apache.org https://gate.ac.uk
