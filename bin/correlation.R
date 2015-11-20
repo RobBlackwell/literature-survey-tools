@@ -3,6 +3,11 @@ library(tm)
 library(Rgraphviz)   
 
 MakeCorrelation <- function (filename) {
+    # Log output to logfile
+	log <- file("logfile.txt")
+	sink(log, append=TRUE)
+	sink(log, append=TRUE, type="message")
+
     print(filename)
     text <- readLines(filename)
     docs <- Corpus(VectorSource(text))
@@ -28,10 +33,9 @@ MakeCorrelation <- function (filename) {
 
     ## Expand TLAs
     toString <- content_transformer(function(x, from, to) gsub(from, to, x))
-    docs <- tm_map(docs, toString, "harbin institute technology", "HIT")
-    docs <- tm_map(docs, toString, "shenzhen institutes advanced technology", "SIAT")
-    docs <- tm_map(docs, toString, "chinese academy sciences", "CAS")
-
+    #docs <- tm_map(docs, toString, "harbin institute technology", "HIT")
+    #docs <- tm_map(docs, toString, "shenzhen institutes advanced technology", "SIAT")
+    #docs <- tm_map(docs, toString, "chinese academy sciences", "CAS")
 
     docs <- tm_map(docs, stemDocument, language = "english")
     
@@ -44,14 +48,17 @@ MakeCorrelation <- function (filename) {
     if (length(terms) > 20) {
 
         terms <- sample(terms, 20)
-
-        
+      
         pdf(sprintf("%s.correlation.pdf", filename))
 
         plot(tdm, terms = terms, corThreshold = 0.3)
 
         dev.off()
     }
+
+	# Restore output to console
+	sink() 
+	sink(type="message")
 }
 
 args <- commandArgs(trailingOnly = TRUE)
@@ -59,6 +66,3 @@ args <- commandArgs(trailingOnly = TRUE)
 for (arg in args) {
     MakeCorrelation(arg)
 }
-
-
-

@@ -5,6 +5,7 @@ clean:
 	rm $(TEMP)/*
 	rm index.*
 	rm Rplots.pdf
+	rm logfile.txt
 
 tika:
 	java -jar lib/tika-app-1.9.jar --text -i $(DATA) --outputDir $(TEMP) 

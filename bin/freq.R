@@ -3,6 +3,10 @@ library(tm)
 library(ggplot2)   
 
 MakeFreq <- function (filename) {
+    # Log output to logfile
+	log <- file("logfile.txt")
+	sink(log, append=TRUE)
+	sink(log, append=TRUE, type="message")
 
     text <- readLines(filename)
 
@@ -25,19 +29,19 @@ MakeFreq <- function (filename) {
     ## Remove any other arbitrary stop words.
     docs <- tm_map(docs, removeWords, c("department", "email"))
 
+    ## Remove whitespace
     docs <- tm_map(docs, stripWhitespace)
 
     ## Expand TLAs
     toString <- content_transformer(function(x, from, to) gsub(from, to, x))
-    docs <- tm_map(docs, toString, "harbin institute technology", "HIT")
-    docs <- tm_map(docs, toString, "shenzhen institutes advanced technology", "SIAT")
-    docs <- tm_map(docs, toString, "chinese academy sciences", "CAS")
+    #docs <- tm_map(docs, toString, "harbin institute technology", "HIT")
+    #docs <- tm_map(docs, toString, "shenzhen institutes advanced technology", "SIAT")
+    #docs <- tm_map(docs, toString, "chinese academy sciences", "CAS")
 
     docs <- tm_map(docs, stemDocument, language = "english")
 
     dtm <- DocumentTermMatrix(docs) 
     freq = sort(colSums(as.matrix(dtm)),decreasing = T)
-
 
     wf <- data.frame(word=names(freq), freq=freq)
     
@@ -48,7 +52,10 @@ MakeFreq <- function (filename) {
         theme(axis.text.x=element_text(angle=45, hjust = 1))
 
     ggsave(p, file=sprintf("%s.freq.pdf", filename))
-
+    
+	# Restore output to console
+	sink() 
+	sink(type="message")
 }
 
 args <- commandArgs(trailingOnly = TRUE)
@@ -56,5 +63,3 @@ args <- commandArgs(trailingOnly = TRUE)
 for (arg in args) {
     MakeFreq(arg)
 }
-
-
