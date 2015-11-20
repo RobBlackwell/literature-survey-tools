@@ -27,6 +27,11 @@ correlations:
 styles:
 	bin/style.py tmp/*.txt
 
+summaries:
+	bin/summarise.py tmp/*.txt
+
+ngrams:
+	bin/ngrams.py tmp/*.txt
 
 doc:
 	bin/figures.py tmp/*.pdf > index.tex
